@@ -16,7 +16,13 @@ public class HttpClient {
                 "Host: " + hostName + "\r\n\r\n";
         // Writes data to the server
         socket.getOutputStream().write(request.getBytes());
+        String line = readLine(socket);
+        System.out.println(line);
+        String[] responseLineParts = line.toString().split(" ");
+        responseCode = Integer.parseInt(responseLineParts[1]);
+    }
 
+    private String readLine(Socket socket) throws IOException {
         // Reads one BYTE at a time, until there is nothing more to read
         // (c = socket.getInputStream().read() != -1) means -
         // Assign the next value of "read()" to c and check if it is not -1
@@ -31,9 +37,7 @@ public class HttpClient {
             // Treat each byte as a charater ("(char)") and add it to the response
             line.append((char)c);
         }
-        System.out.println(line);
-        String[] responseLineParts = line.toString().split(" ");
-        responseCode = Integer.parseInt(responseLineParts[1]);
+        return line.toString();
     }
 
     public static void main(String[] args) throws IOException {
