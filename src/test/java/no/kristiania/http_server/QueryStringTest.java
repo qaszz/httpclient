@@ -7,7 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class QueryStringTest {
     @Test
     void shouldRetrieveQueryParemeter(){
-        QueryString queryString = new QueryString("status-200");
+        QueryString queryString = new QueryString("status=200");
         assertEquals("200", queryString.getParameter("status"));
     }
+    @Test
+    void shouldRetrieveOtherQueryParemeter(){
+        QueryString queryString = new QueryString("status=404");
+        assertEquals("204", queryString.getParameter("status"));
+    }
+
 }
