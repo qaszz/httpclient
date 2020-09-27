@@ -13,7 +13,13 @@ public class QueryStringTest {
     @Test
     void shouldRetrieveOtherQueryParemeter(){
         QueryString queryString = new QueryString("status=404");
-        assertEquals("204", queryString.getParameter("status"));
+        assertEquals("404", queryString.getParameter("status"));
+    }
+    @Test
+    void shouldRetrieveQueryParemeterByName(){
+        QueryString queryString = new QueryString("text=Hello");
+        assertEquals(null, queryString.getParameter("status"));
+        assertEquals("Hello", queryString.getParameter("text"));
     }
 
 }
